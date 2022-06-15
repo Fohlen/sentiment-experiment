@@ -1,7 +1,7 @@
 name: Calculate sentiment
 on: [push]
 jobs:
-  Run sentiment analysis:
+  sentiment-analysis:
     runs-on: macos-latest
     steps:
       - name: Check out repository code
