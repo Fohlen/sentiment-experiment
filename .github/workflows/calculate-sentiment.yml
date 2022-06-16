@@ -12,7 +12,7 @@ jobs:
         run: curl https://files.pushshift.io/reddit/comments/RC_2005-12.bz2 >> RC_2005-12.bz2
       - name: Select target comments
         env:
-            FILTER: '["reddit.com"]'
+            FILTER: '["Aave_Official", "binance", "Bitcoin", "cardano", "Chainlink", "cosmosnetwork", "cro", "dogecoin", "eos", "ethereum", "litecoin", "Monero", "nem", "dot", "solana", "Stellar", "Tether", "Tronix", "USDC", "UniSwap", "WBTC", "Ripple"]'
         run: bzcat RC_2005-12.bz2 | jq --argjson f "$FILTER" -c '. | select(.subreddit == $f[])' >> comments.jsonl
       - name: Calculate sentiments
         run: cat comments.jsonl | ./sentiment_for_lines.sh >> sentiment.txt
