@@ -13,7 +13,7 @@ jobs:
       - name: Select target comments
         env:
             FILTER: '["reddit.com"]'
-        run: bzcat RC_2005-12.bz2 | jq --argjson f "$FILTER" -c '. | select(.subreddit | in($f))' >> comments.jsonl
+        run: bzcat RC_2005-12.bz2 | jq --argjson f "$FILTER" -c '. | select(.subreddit == $f[])' >> comments.jsonl
       - name: Calculate sentiments
         run: cat comments.jsonl | ./sentiment_for_lines.sh >> sentiment.txt
       - name: Create dataset
