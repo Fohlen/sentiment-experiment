@@ -9,16 +9,16 @@ jobs:
       - name: Set up environment
         run: brew install flight-school/formulae/sentiment jq
       - name: Download archive
-        run: curl https://files.pushshift.io/reddit/comments/RC_2006-12.bz2 >> $HOME/RC_2006-12.bz2
+        run: curl https://files.pushshift.io/reddit/comments/RC_2006-12.bz2 >> RC_2006-12.bz2
       - name: Select target comments
-        run: bzcat $HOME/RC_2006-12.bz2 | jq -c '. | select(.subreddit == ("reddit.com"))' >> $HOME/comments.jsonl
+        run: bzcat RC_2006-12.bz2 | jq -c '. | select(.subreddit == ("reddit.com"))' >> comments.jsonl
       - name: Calculate sentiments
-        run: cat $HOME/comments.jsonl | ./sentiment_for_lines.sh >> $HOME/sentiment.txt
+        run: cat comments.jsonl | ./sentiment_for_lines.sh >> sentiment.txt
       - name: Create dataset
         run: |
-          cat $HOME/comments.jsonl | jq -r '. | [.id, .subreddit, .created_utc] | @tsv' >> basic.tsv
-          paste basic.tsv $HOME/sentiment.txt >> $HOME/dataset.tsv
+          cat comments.jsonl | jq -r '. | [.id, .subreddit, .created_utc] | @tsv' >> basic.tsv
+          paste basic.tsv sentiment.txt >> dataset.tsv
       - uses: actions/upload-artifact@v3
         with:
           name: RC_2006-12-sentiment.tsv
-          path: $HOME/dataset.tsv
+          path: dataset.tsv
