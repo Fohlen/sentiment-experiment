@@ -25,5 +25,5 @@ jobs:
           paste basic.tsv sentiment.txt >> dataset.tsv
       - uses: actions/upload-artifact@v3
         with:
-          name: RC_2005-12-sentiment.tsv
+          name: ${{ format('{0}-sentiment.tsv', matrix.version) }}
           path: dataset.tsv
