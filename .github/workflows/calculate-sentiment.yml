@@ -11,7 +11,9 @@ jobs:
       - name: Download archive
         run: curl https://files.pushshift.io/reddit/comments/RC_2005-12.bz2 >> RC_2005-12.bz2
       - name: Select target comments
-        run: bzcat RC_2005-12.bz2 | jq -c '. | select(.subreddit == ("reddit.com"))' >> comments.jsonl
+        env:
+            FILTER: '["reddit.com"]'
+        run: bzcat RC_2005-12.bz2 | jq --argjson f "$FILTER" -c '. | select(.subreddit | in($f))' >> comments.jsonl
       - name: Calculate sentiments
         run: cat comments.jsonl | ./sentiment_for_lines.sh >> sentiment.txt
       - name: Create dataset
