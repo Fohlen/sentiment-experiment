@@ -5,7 +5,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        archive: ["RC_2005-12"]
+        archive: ["RC_2005-12", "RC_2006-01"]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
