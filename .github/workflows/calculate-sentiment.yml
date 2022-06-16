@@ -1,5 +1,5 @@
 name: Calculate sentiment
-on: [push]
+on: [workflow_dispatch]
 jobs:
   sentiment-analysis:
     runs-on: macos-latest
