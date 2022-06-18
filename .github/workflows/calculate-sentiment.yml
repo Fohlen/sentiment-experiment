@@ -13,10 +13,7 @@ jobs:
       - name: Set up environment
         run: brew install flight-school/formulae/sentiment jq
       - name: Download archive
-        run: |
-          echo ${{ matrix.version }}
-          echo ${{ format('https://files.pushshift.io/reddit/comments/{0}.bz2', matrix.version ) }}
-          curl ${{ format('https://files.pushshift.io/reddit/comments/{0}.bz2', matrix.version ) }} >> archive.bz2
+        run: curl ${{ format('https://files.pushshift.io/reddit/comments/{0}.bz2', matrix.version ) }} >> archive.bz2
       - name: Select target comments
         env:
             FILTER: '["Aave_Official", "binance", "Bitcoin", "cardano", "Chainlink", "cosmosnetwork", "cro", "dogecoin", "eos", "ethereum", "litecoin", "Monero", "nem", "dot", "solana", "Stellar", "Tether", "Tronix", "USDC", "UniSwap", "WBTC", "Ripple"]'
