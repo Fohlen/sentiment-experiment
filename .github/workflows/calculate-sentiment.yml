@@ -13,12 +13,12 @@ jobs:
         run: brew install flight-school/formulae/sentiment jq
       - name: Download archive
         run: curl ${{ format('https://files.pushshift.io/reddit/comments/{0}.bz2', matrix.archive ) }} >> archive.bz2
-      - name: Select target comments
-        env:
-            FILTER: '["Aave_Official", "binance", "Bitcoin", "cardano", "Chainlink", "cosmosnetwork", "cro", "dogecoin", "eos", "ethereum", "litecoin", "Monero", "nem", "dot", "solana", "Stellar", "Tether", "Tronix", "USDC", "UniSwap", "WBTC", "Ripple"]'
-        run: bzcat archive.bz2 | jq --argjson f "$FILTER" -c '. | select(.subreddit == $f[])' >> comments.jsonl
+      #- name: Select target comments
+      #  env:
+      #      FILTER: '["Aave_Official", "binance", "Bitcoin", "cardano", "Chainlink", "cosmosnetwork", "cro", "dogecoin", "eos", "ethereum", "litecoin", "Monero", "nem", "dot", "solana", "Stellar", "Tether", "Tronix", "USDC", "UniSwap", "WBTC", "Ripple"]'
+      #  run: bzcat archive.bz2 | jq --argjson f "$FILTER" -c '. | select(.subreddit == $f[])' >> comments.jsonl
       - name: Calculate sentiments
-        run: cat comments.jsonl | ./sentiment_for_lines.sh >> sentiment.txt
+        run: bzcat archive.bz2 | ./sentiment_for_lines.sh >> sentiment.txt
       - name: Create dataset
         run: |
           cat comments.jsonl | jq -r '. | [.id, .subreddit, .created_utc] | @tsv' >> basic.tsv
