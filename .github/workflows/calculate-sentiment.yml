@@ -2,7 +2,7 @@ name: Calculate sentiment
 on: [push]
 jobs:
   sentiment-analysis:
-    runs-on: macos-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         version: [RC_2013-01, RC_2013-02, RC_2013-03, RC_2013-04, RC_2013-05, RC_2013-06, RC_2013-07, RC_2013-08, RC_2013-09, RC_2013-10, RC_2013-11, RC_2013-12]
