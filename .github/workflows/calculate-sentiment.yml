@@ -7,7 +7,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        version: [RC_2016-01, RC_2016-02, RC_2016-03, RC_2016-04, RC_2016-05, RC_2016-06, RC_2016-07, RC_2016-08, RC_2016-09, RC_2016-10, RC_2016-11, RC_2016-12]
+        version: [RC_2015-01, RC_2015-02, RC_2015-03, RC_2015-04, RC_2015-05, RC_2015-06, RC_2015-07, RC_2015-08, RC_2015-09, RC_2015-10, RC_2015-11, RC_2015-12]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
