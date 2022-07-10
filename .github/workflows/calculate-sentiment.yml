@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [RC_2019-01, RC_2019-02, RC_2019-03, RC_2019-04, RC_2019-05, RC_2019-06, RC_2019-07, RC_2019-08, RC_2019-09, RC_2019-10, RC_2019-11, RC_2019-12]
+        version: [RC_2020-01, RC_2020-02, RC_2020-03, RC_2020-04, RC_2020-05, RC_2020-06, RC_2020-07, RC_2020-08, RC_2020-09, RC_2020-10, RC_2020-11, RC_2020-12]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
