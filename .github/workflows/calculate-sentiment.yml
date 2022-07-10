@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [RC_2013-01]
+        version: [RC_2005-12]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       - name: Select target comments
         env:
             FILTER: '["Aave_Official", "binance", "Bitcoin", "cardano", "Chainlink", "cosmosnetwork", "cro", "dogecoin", "eos", "ethereum", "litecoin", "Monero", "nem", "dot", "solana", "Stellar", "Tether", "Tronix", "USDC", "UniSwap", "WBTC", "Ripple"]'
-        run: zstdcat --memory=4096MB archive.zst | jq --argjson f "$FILTER" -c '. | select(.subreddit == $f[])' >> comments.jsonl
+        run: zstdcat --memory=2048MB archive.zst | jq --argjson f "$FILTER" -c '. | select(.subreddit == $f[])' >> comments.jsonl
       - name: Calculate sentiments
         run: cat comments.jsonl | jq -r '.body' | python3 sentiment_for_lines.py >> sentiment.txt
       - name: Create dataset
